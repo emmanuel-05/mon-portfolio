@@ -1,0 +1,14 @@
+# Ne pas envoyer l'environnement virtuel Python
+venv/
+ENV/
+.venv/
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+
+# Ne pas envoyer les modules téléchargés par React
+node_modules/
+dist/
+.env.local
+.DS_Store
