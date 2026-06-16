@@ -59,6 +59,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:3000",
     "https://mon-portfolio-pearl-delta.vercel.app",
+    "https://mon-portfolio-abw5o4amz-gnamien-emmanuel-portfolio.vercel.app",
 ]
 
 ROOT_URLCONF = 'backend.urls'
