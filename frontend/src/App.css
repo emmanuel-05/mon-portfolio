@@ -1,62 +1,91 @@
+/* ============================================
+   DESIGN TOKENS (Variables CSS globales)
+   ============================================ */
 :root {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f7f6;
-  color: #333;
+    --color-bg-primary: #0a0a0a;
+    --color-bg-secondary: #111111;
+    --color-bg-card: #1a1a1a;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #aaaaaa;
+    --color-text-muted: #666666;
+    --color-border: #2a2a2a;
+    --color-accent: #ffffff;
+
+    --font-display: "Inter", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+
+    --max-width: 1100px;
+    --navbar-height: 56px;
 }
 
-.portfolio-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+/* ============================================
+   RESET GLOBAL
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-header {
-  text-align: center;
-  margin-bottom: 3rem;
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
-.projets-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.projet-card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+ul {
+    list-style: none;
 }
 
-.projet-card:hover {
-  transform: translateY(-5px);
+/* ============================================
+   BOUTONS (composant partagé entre plusieurs JSX)
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.4rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition:
+        opacity 0.2s,
+        background 0.2s;
+    border: 1px solid transparent;
 }
 
-.projet-content {
-  padding: 1.5rem;
+.btn--primary {
+    background-color: var(--color-text-primary);
+    color: var(--color-bg-primary);
+    border-color: var(--color-text-primary);
 }
 
-.tech-tags {
-  margin: 1rem 0;
+.btn--primary:hover {
+    opacity: 0.88;
 }
 
-.tech-tag {
-  background: #e2e8f0;
-  color: #4a5568;
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  margin-right: 0.5rem;
-  display: inline-block;
+.btn--secondary {
+    background-color: transparent;
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
 }
 
-.btn-github {
-  display: inline-block;
-  background: #2d3748;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
+.btn--secondary:hover {
+    border-color: var(--color-text-secondary);
 }

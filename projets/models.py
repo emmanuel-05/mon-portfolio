@@ -1,14 +1,17 @@
 from django.db import models
 
-# Create your models here.
+class Technologie(models.Model):
+    nom = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.nom
+    
 class Projet(models.Model):
     titre = models.CharField(max_length=100)
-    description = models.TextField()
-    technologies = models.CharField(max_length=200) # Ex: "React, Django, PostgreSQL"
+    description = models.TextField()  
+    technologies = models.ManyToManyField(Technologie, related_name="projets")
     lien_github = models.URLField(blank=True)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
+    lien_demo = models.URLField(blank=True)
+    
     def __str__(self):
         return self.titre

@@ -1,0 +1,36 @@
+/* ============================================
+   ABOUT
+   ============================================ */
+.about {
+    padding: var(--spacing-xl) var(--spacing-md);
+    background-color: var(--color-bg-secondary);
+}
+
+.about__content {
+    max-width: var(--max-width);
+    margin: -30px auto;
+    max-width: 600px;
+}
+
+.about__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--spacing-md);
+}
+
+.about__text {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    margin-bottom: var(--spacing-sm);
+    text-align: left;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .about {
+        padding-left: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+    }
+}

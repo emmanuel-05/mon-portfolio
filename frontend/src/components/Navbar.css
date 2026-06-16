@@ -1,0 +1,47 @@
+/* ============================================
+   NAVBAR
+   ============================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-md);
+    background-color: var(--color-bg-primary);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.navbar__brand {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.navbar__links {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.navbar__link {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    transition: color 0.2s;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .navbar {
+        padding: 0 var(--spacing-sm);
+    }
+}

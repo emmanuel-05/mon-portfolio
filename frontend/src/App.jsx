@@ -1,90 +1,97 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+// Importation des hooks React nécessaires :
+// - useState : Permet de gérer l'état local dans le composant fonctionnel
+// - useEffect : Permet d'exécuter des effets de bord (comme la récupération de données) après le rendu
+import { useState, useEffect } from "react";
+// Importation des composants de routage de React Router
+import { Routes, Route } from "react-router-dom";
+
+// Importation de la page principale
+import Home from "./pages/Home";
+
+// Importation des composants globaux de structure
+import Navbar from "./components/Navbar";
+import About from "./components/About";
+import Footer from "./components/Footer";
+
+// Importation des styles généraux de l'application
+import "./App.css";
 
 function App() {
-  // 1. Initialiser l'état pour stocker nos projets (un tableau vide par défaut)
-  const [projets, setProjets] = useState([]);
-  // État optionnel pour gérer le chargement ou les erreurs
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    // Déclaration des états locaux avec useState :
+    // - projets : Liste des projets récupérés de l'API (initialisé à tableau vide)
+    const [projets, setProjets] = useState([]);
 
-  // 2. Déclencher la fonction de récupération au chargement du composant
-  useEffect(() => {
-    // URL de l'API Django (ajuste le port si nécessaire, ex: 8000)
-    const urlAPI = 'http://127.0.0.1:8000/api/projets/';
+    // - technologies : Liste des compétences/technologies de l'API (initialisé à tableau vide)
+    const [technologies, setTechnologies] = useState([]);
 
-    fetch(urlAPI)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Erreur HTTP ! Statut : ${response.status}`);
-        }
-        return response.json(); // Convertit la réponse textuelle en JSON [cite: 8, 14]
-      })
-      .then((data) => {
-        setProjets(data); // Stocke les données de Django dans notre état 
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Impossible de charger les projets :", err);
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []); // Le tableau vide [] signifie "exécuter cette fonction une seule fois au chargement"
+    // - loading : Indicateur de chargement actif/inactif (initialisé à true)
+    const [loading, setLoading] = useState(true);
 
-  // 3. Gestion des affichages d'attente ou d'erreur
-  if (loading) return <div className="loading">Chargement de mes super projets...</div>;
-  if (error) return <div className="error">Oups ! Une erreur est survenue : {error}</div>;
+    // - error : Message d'erreur s'il y a un souci avec l'API (initialisé à null)
+    const [error, setError] = useState(null);
 
-  // 4. L'affichage de ton Portfolio si tout s'est bien passé [cite: 8]
-  return (
-    <div className="portfolio-container">
-      <header>
-        <h1>Mon Portfolio Full-Stack</h1>
-        <p>Découvrez les projets que j'ai développés avec Django et React !</p>
-      </header>
+    // useEffect avec un tableau de dépendances vide [] s'exécute uniquement au montage du composant
+    useEffect(() => {
+        // URLs des API Django locales
+        const urlProjects = "http://127.0.0.1:8000/api/projets/";
+        const urlTechnos = "http://127.0.0.1:8000/api/projets/list-techno";
 
-      <main>
-        <section className="projets-section">
-          <h2>Mes Projets ({projets.length})</h2>
-          
-          {projets.length === 0 ? (
-            <p>Aucun projet trouvé. Ajoute-en dans le panel Admin de Django !</p>
-          ) : (
-            <div className="projets-grid">
-              {projets.map((projet) => (
-                <article key={projet.id} className="projet-card">
-                  {/* Si tu as configuré les images dans Django */}
-                  {projet.image && (
-                    <img src={projet.image} alt={projet.titre} className="projet-img" />
-                  )}
-                  <div className="projet-content">
-                    <h3>{projet.titre}</h3>
-                    <p>{projet.description}</p>
-                    <div className="tech-tags">
-                        {projet.technologies.split(',').map((tech, index) => {
-                            const cleanedTech = tech.trim();
-                            // On n'affiche le tag que s'il n'est pas vide
-                            return cleanedTech ? (
-                                <span key={index} className="tech-tag">
-                                    {cleanedTech}
-                                </span>
-                            ) : null;
-                        })}
-                    </div>
-                    {projet.lien_github && (
-                      <a href={projet.lien_github} target="_blank" rel="noopener noreferrer" className="btn-github">
-                        Voir sur GitHub
-                      </a>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-        </section>
-      </main>
-    </div>
-  );
+        // Promise.all() permet d'exécuter les deux requêtes fetch en parallèle
+        // et d'attendre que les deux soient résolues avec succès.
+        Promise.all([
+            fetch(urlProjects).then((res) => {
+                if (!res.ok) throw new Error();
+                return res.json();
+            }),
+            fetch(urlTechnos).then((res) => {
+                if (!res.ok) throw new Error();
+                return res.json();
+            })
+        ])
+            // Une fois les deux requêtes terminées et converties en JSON :
+            .then(([dataProjets, dataTechnos]) => {
+                console.log("Projets chargés :", dataProjets);
+                console.log("Technologies chargées :", dataTechnos);
+
+                // Mise à jour des états locaux avec les données reçues
+                setProjets(dataProjets);
+                setTechnologies(dataTechnos);
+
+                // Fin du mode chargement
+                setLoading(false);
+            })
+            // En cas d'erreur sur l'une des requêtes fetch :
+            .catch((err) => {
+                console.error("Erreur de chargement :", err);
+                setError("Impossible de charger les données depuis l'API Django.");
+                setLoading(false);
+            });
+    }, []);
+
+    // Affichage d'un écran de chargement temporaire
+    if (loading) return <div className="loading">Chargement...</div>;
+
+    // Affichage d'un écran d'erreur en cas d'échec de la récupération des données
+    if (error) return <div className="error"> Oups ! {error}</div>;
+
+    return (
+        <>
+            {/* Barre de navigation globale */}
+            <Navbar />
+
+            {/* Système de navigation par routes */}
+            <Routes>
+                {/* Route par défaut (Page d'accueil) */}
+                <Route path="/" element={<Home projets={projets} technologies={technologies} />} />
+
+                {/* Route secondaire vers la section À propos */}
+                <Route path="/about" element={<About />} />
+            </Routes>
+
+            {/* Pied de page global */}
+            <Footer />
+        </>
+    );
 }
 
 export default App;
