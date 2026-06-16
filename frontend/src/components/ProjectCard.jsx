@@ -15,31 +15,35 @@ const ProjectCard = ({ projet }) => {
     return (
         // Balise sémantique HTML5 <article> représentant un contenu autonome (la carte projet)
         <article className="project-card">
-            <div className="project-card__body">
-                {/* Titre du projet */}
-                <h3 className="project-card__title">{projet.titre}</h3>
+            {projet.image_url ? (
+                <div className="project-card__image-container">
+                    <img 
+                        src={projet.image_url} 
+                        alt={`Capture d'écran du projet ${projet.titre}`} 
+                        className="project-card__image"
+                        loading="lazy" // Optimisation performance : charge l'image uniquement quand elle apparaît à l'écran
+                    />
+                </div>
+            ) : (
+                /* Un bloc gris par défaut si jamais un projet n'a pas encore d'image */
+                <div className="project-card__image-placeholder">
+                    <span>Pas d'aperçu disponible</span>
+                </div>
+            )}
 
-                {/* Description du projet */}
+            <div className="project-card__body">
+                <h3 className="project-card__title">{projet.titre}</h3>
                 <p className="project-card__description">{projet.description}</p>
 
                 {/* 
-          Section des technologies (tags) :
-          1. On vérifie si la liste de technologies existe et n'est pas vide.
-          2. Si oui, on affiche un conteneur div avec la classe CSS 'project-card__tags'.
-          3. On utilise .map() pour boucler sur chaque technologie de la liste.
-          4. Pour chaque technologie, on génère un élément <span> avec une clé unique (tech.id) 
-             et on affiche son nom (tech.nom).
-        */}
+                    Section des technologies (tags) :
+                    1. On vérifie si la liste de technologies existe et n'est pas vide.
+                    2. Si oui, on affiche un conteneur div avec la classe CSS 'project-card__tags'.
+                    3. On utilise .map() pour boucler sur chaque technologie de la liste.
+                    4. Pour chaque technologie, on génère un élément <span> avec une clé unique (tech.id) 
+                        et on affiche son nom (tech.nom).
+                */}
 
-                {/* {projet.technologies && projet.technologies.length > 0 && (
-          <div className="project-card__tags">
-            {projet.technologies.map((tech) => (
-              <span key={tech.id} className="project-card__tag">
-                {tech.nom}
-              </span>
-            ))}
-          </div>
-        )} */}
                 {projet.technologies && projet.technologies.length > 0 && (
                     <div className="project-card__tags">
                         {visibleTechs.map((tech) => (
@@ -53,11 +57,6 @@ const ProjectCard = ({ projet }) => {
                     </div>
                 )}
 
-                {/* 
-          Lien vers le dépôt GitHub du projet :
-          - target="_blank" : ouvre le lien dans un nouvel onglet.
-          - rel="noopener noreferrer" : sécurité pour empêcher le vol de session/phishing.
-        */}
                 <a href={projet.lien_github} target="_blank" rel="noopener noreferrer">
                     Voir le projet
                 </a>
@@ -66,5 +65,4 @@ const ProjectCard = ({ projet }) => {
     );
 };
 
-// Exportation par défaut du composant pour pouvoir l'importer et l'utiliser ailleurs
 export default ProjectCard;

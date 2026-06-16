@@ -1,6 +1,4 @@
-// Importation du composant enfant ProjectCard qui servira à afficher chaque projet
 import ProjectCard from "./ProjectCard";
-// Importation des styles CSS associés à la section des projets
 import "./Projects.css";
 
 /**
@@ -12,13 +10,9 @@ import "./Projects.css";
  */
 const Projects = ({ projets }) => {
     return (
-        // Section sémantique HTML5 pour regrouper tous les projets
         <section className="projects" id="projects">
             <div className="projects__content">
-                {/* Titre principal de la section */}
-                <h2 className="projects__title">Projects</h2>
-
-                {/* Grille flexbox/grid pour disposer les cartes projets */}
+                <h2 className="projects__title">Mes Projets</h2>
                 <div className="projects__grid">
                     {/* 
             Boucle sur le tableau 'projets' avec la méthode .map() :
@@ -38,5 +32,4 @@ const Projects = ({ projets }) => {
     );
 };
 
-// Exportation du composant pour son utilisation dans la page d'accueil (Home)
 export default Projects;

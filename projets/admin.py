@@ -12,11 +12,12 @@ class ProjetAdmin(admin.ModelAdmin):
         'id',
         'titre',
         'description',
+        'image_url',
         'afficher_technologies',
         'lien_github',
         'lien_demo',
     )
-    
+    list_editable = ['image_url']
 
     def afficher_technologies(self, obj):
         # On récupère toutes les technologies du projet et on extrait leur nom
