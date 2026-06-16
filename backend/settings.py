@@ -54,13 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Autorise React (qui tourne sur le port 5173 ou 3000)
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://localhost:3000",
-    "https://mon-portfolio-pearl-delta.vercel.app",
-    "https://mon-portfolio-abw5o4amz-gnamien-emmanuel-portfolio.vercel.app",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'backend.urls'
 
