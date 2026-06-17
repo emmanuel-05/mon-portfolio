@@ -90,8 +90,7 @@ function App() {
                 {/* Route par défaut (Page d'accueil) */}
                 <Route path="/" element={<Home projets={projets} technologies={technologies} />} />
 
-                {/* Route secondaire vers la section À propos */}
-                <Route path="/about" element={<About />} />
+                {/* <Route path="/about" element={<About />} /> */}
             </Routes>
 
             {/* Pied de page global */}

@@ -6,12 +6,12 @@ const About = () => {
             <div className="about__content">
                 <h2 className="about__title">About</h2>
                 <p className="about__text">
-                    Étudiant en Big Data et Intelligence Artificielle, je développe des applications
-                    web et mobiles tout en explorant les domaines de la data et de l'IA.
+                    Étudiant en Big Data et IA, je conçois des applications web et mobiles performantes
+                    en intégrant toute la chaîne de la donnée et de l'intelligence artificielle.
                 </p>
                 <p className="about__text">
-                    J'aime concevoir des solutions utiles, performantes et centrées sur les besoins
-                    réels des utilisateurs.
+                    De l'interface utilisateur jusqu'à l'infrastructure invisible, je construis des 
+                    solutions complètes et intelligentes centrées sur les besoins réels.
                 </p>
             </div>
         </section>

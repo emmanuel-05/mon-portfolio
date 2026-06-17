@@ -2,7 +2,7 @@
 import Hero from "../components/Hero";
 import About from "../components/About";
 import Projects from "../components/Projects";
-import Contact from "../components/Contact";
+import ContactAcc from "../components/ContactAcc";
 import Expertise from "../components/Expertise";
 
 /**
@@ -23,7 +23,7 @@ const Home = ({ projets, technologies }) => {
             <Projects projets={projets} technologies={technologies} />
 
             {/* Section Formulaire de contact */}
-            <Contact />
+            <ContactAcc />
         </main>
     );
 };

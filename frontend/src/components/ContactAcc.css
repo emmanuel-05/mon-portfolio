@@ -1,0 +1,27 @@
+.cta {
+  padding: var(--spacing-xl) var(--spacing-md);
+  background-color: var(--color-bg-primary);
+}
+
+.cta__content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-sm);
+}
+
+.cta__title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.cta__subtitle {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 480px;
+}

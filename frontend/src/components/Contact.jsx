@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./Contact.css";
+import { Mail } from "lucide-react";
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const WEB3FORMS_ACCESS_KEY = "c4b18920-fee4-4d7a-bdb8-3a3fdcc9c9c7";
 
@@ -98,21 +100,21 @@ const Contact = () => {
                 <div className="contact__info">
                     <h2 className="contact__info-title">Contact Information</h2>
                     <div className="contact__cards-list">
-                      <a href="mailto:gnamienemmanuel@gmail.com" className="contact__card">
-                          <span className="contact__card-icon">✉</span>
+                      <a href="mailto:gnamien.em@://gmail.com" target="_blank" className="contact__card">
+                          <span className="contact__card-icon"><Mail size={28} /></span>
                           <div>
                               <p className="contact__card-label">Email</p>
-                              <p className="contact__card-value">gnamienemmanuel@gmail.com</p>
+                              <p className="contact__card-value">gnamien.em@gmail.com</p>
                           </div>
                       </a>
 
                       <a
-                          href="https://github.com/gnamien-emmanuel"
+                          href="https://github.com/emmanuel-05"
                           target="_blank"
                           rel="noreferrer"
                           className="contact__card"
                       >
-                          <span className="contact__card-icon">⌥</span>
+                          <span className="contact__card-icon">{<FaGithub size={28} />}</span>
                           <div>
                               <p className="contact__card-label">GitHub</p>
                               <p className="contact__card-value">github.com/gnamien-emmanuel</p>
@@ -120,12 +122,12 @@ const Contact = () => {
                       </a>
 
                       <a
-                          href="https://linkedin.com/in/gnamien-bi-emmanuel"
+                          href="https://www.linkedin.com/in/gnamien-bi-hirigolin-emmanuel-pers%C3%A9v%C3%A9rance-662189284"
                           target="_blank"
                           rel="noreferrer"
                           className="contact__card"
                       >
-                          <span className="contact__card-icon">in</span>
+                          <span className="contact__card-icon">{<FaLinkedin size={28} />}</span>
                           <div>
                               <p className="contact__card-label">LinkedIn</p>
                               <p className="contact__card-value">linkedin.com/in/gnamien-bi-emmanuel</p>
@@ -136,7 +138,7 @@ const Contact = () => {
 
                 {/* ── Colonne droite : formulaire ── */}
                 <div className="contact__form-wrapper">
-                    <h2 className="contact__form-title">Send me a message</h2>
+                    <h2 className="contact__form-title">Contactez-moi</h2>
 
                     <div className="contact__form-body">
                       <form className="contact__form" onSubmit={handleSubmit}>

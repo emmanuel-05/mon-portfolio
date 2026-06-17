@@ -1,4 +1,5 @@
 import os
+import re
 import dj_database_url
 from pathlib import Path
 
@@ -20,8 +21,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-2uxd8&rfu3hh&t0#x%^2-cw!kpqwhmr*-y*bgh=&#_+fb$+$06'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True
+#DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['*']
 

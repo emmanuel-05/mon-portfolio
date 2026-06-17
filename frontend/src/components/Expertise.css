@@ -67,3 +67,13 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Style des icônes */
+.expertise-card__icon svg {
+    color: #3b82f6;
+    transition: transform 0.3s ease;
+}
+
+.expertise-card:hover .expertise-card__icon svg {
+    transform: scale(1.1);
+}
