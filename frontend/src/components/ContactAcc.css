@@ -1,5 +1,5 @@
 .cta {
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
   background-color: var(--color-bg-primary);
 }
 
@@ -24,4 +24,5 @@
   color: var(--color-text-secondary);
   line-height: 1.7;
   max-width: 480px;
+  text-align: left;
 }

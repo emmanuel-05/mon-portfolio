@@ -1,5 +1,5 @@
 import "./ContactAcc.css";
-
+import { Link } from "react-router-dom";
 const ContactAcc = () => {
   return (
     <section className="cta">
@@ -9,9 +9,8 @@ const ContactAcc = () => {
           Je suis disponible pour des opportunités professionnelles et des missions en freelance.
           N'hésitez pas à me contacter pour discuter de votre projet.
         </p>
-        <a href="#contact" className="btn btn--primary ">
-          Contactez-moi
-        </a>
+        <Link to="/contact" className="btn btn--primary">Contactez-moi</Link>
+
       </div>
     </section>
   );

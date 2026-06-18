@@ -145,7 +145,7 @@ const Contact = () => {
                           {/* Champ : Nom */}
                           <div className="form-group">
                               <label className="form-label" htmlFor="name">
-                                  Name
+                                  Nom et prénom
                               </label>
                               <input
                                   id="name"
@@ -179,7 +179,7 @@ const Contact = () => {
                           {/* Champ : Objet */}
                           <div className="form-group">
                               <label className="form-label" htmlFor="subject">
-                                  Subject
+                                  Sujet
                               </label>
                               <input
                                   id="subject"

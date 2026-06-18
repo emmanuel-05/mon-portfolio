@@ -1,16 +1,13 @@
-// Importation des hooks React nécessaires :
-// - useState : Permet de gérer l'état local dans le composant fonctionnel
-// - useEffect : Permet d'exécuter des effets de bord (comme la récupération de données) après le rendu
 import { useState, useEffect } from "react";
-// Importation des composants de routage de React Router
 import { Routes, Route } from "react-router-dom";
 
 // Importation de la page principale
 import Home from "./pages/Home";
+import Contact from "./pages/Contact";
 
 // Importation des composants globaux de structure
+import ScrollToTop from "./components/ScrollToTop";
 import Navbar from "./components/Navbar";
-import About from "./components/About";
 import Footer from "./components/Footer";
 
 // Importation des styles généraux de l'application
@@ -18,30 +15,30 @@ import "./App.css";
 
 function App() {
     // Déclaration des états locaux avec useState :
-    // - projets : Liste des projets récupérés de l'API (initialisé à tableau vide)
+    // projets : Liste des projets récupérés de l'API (initialisé à tableau vide)
     const [projets, setProjets] = useState([]);
 
-    // - technologies : Liste des compétences/technologies de l'API (initialisé à tableau vide)
+    // technologies : Liste des compétences/technologies de l'API (initialisé à tableau vide)
     const [technologies, setTechnologies] = useState([]);
 
-    // - loading : Indicateur de chargement actif/inactif (initialisé à true)
+    // loading : Indicateur de chargement actif/inactif (initialisé à true)
     const [loading, setLoading] = useState(true);
 
-    // - error : Message d'erreur s'il y a un souci avec l'API (initialisé à null)
+    // error : Message d'erreur s'il y a un souci avec l'API (initialisé à null)
     const [error, setError] = useState(null);
 
     // useEffect avec un tableau de dépendances vide [] s'exécute uniquement au montage du composant
     useEffect(() => {
         
-        /* URLs des API Django locales
+        //URLs des API Django locales
         const urlProjects = "http://localhost:8000/api/projets/";
         const urlTechnos = "http://localhost:8000/api/projets/list-techno";
-        */
+       
 
         // URLs de l'API Django en production
-        const urlProjects = "https://mon-portfolio-1-48v8.onrender.com/api/projets/";
+        /* const urlProjects = "https://mon-portfolio-1-48v8.onrender.com/api/projets/";
         const urlTechnos = "https://mon-portfolio-1-48v8.onrender.com/api/projets/list-techno";
-
+ */
         // Promise.all() permet d'exécuter les deux requêtes fetch en parallèle
         // et d'attendre que les deux soient résolues avec succès.
         Promise.all([
@@ -82,15 +79,12 @@ function App() {
 
     return (
         <>
-            {/* Barre de navigation globale */}
+            <ScrollToTop />
             <Navbar />
 
-            {/* Système de navigation par routes */}
             <Routes>
-                {/* Route par défaut (Page d'accueil) */}
                 <Route path="/" element={<Home projets={projets} technologies={technologies} />} />
-
-                {/* <Route path="/about" element={<About />} /> */}
+                <Route path="contact" element={<Contact />} />
             </Routes>
 
             {/* Pied de page global */}

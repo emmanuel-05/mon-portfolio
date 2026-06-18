@@ -1,4 +1,5 @@
 import "./Navbar.css";
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     return (
@@ -6,19 +7,34 @@ const Navbar = () => {
             <div className="navbar__brand">Portfolio</div>
             <ul className="navbar__links">
                 <li>
-                    <a href="#home" className="navbar__link navbar__link--active">
+                    <NavLink 
+                        to="/" 
+                        className={({ isActive }) => 
+                            isActive ? "navbar__link navbar__link--active" : "navbar__link"
+                        }
+                    >
                         Home
-                    </a>
+                    </NavLink>
                 </li>
                 <li>
-                    <a href="#projects" className="navbar__link">
+                    <NavLink 
+                        to="/projects" 
+                        className={({ isActive }) => 
+                            isActive ? "navbar__link navbar__link--active" : "navbar__link"
+                        }
+                    >
                         Projects
-                    </a>
+                    </NavLink>
                 </li>
                 <li>
-                    <a href="#contact" className="navbar__link">
+                    <NavLink 
+                        to="/contact" 
+                        className={({ isActive }) => 
+                            isActive ? "navbar__link navbar__link--active" : "navbar__link"
+                        }
+                    >
                         Contact
-                    </a>
+                    </NavLink>
                 </li>
             </ul>
         </nav>

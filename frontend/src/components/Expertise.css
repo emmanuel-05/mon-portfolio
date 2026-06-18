@@ -1,5 +1,5 @@
 .expertise {
-    padding: var(--spacing-xl) var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-xs) var(--spacing-md);
     background-color: var(--color-bg-primary);
 }
 
