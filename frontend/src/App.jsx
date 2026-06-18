@@ -31,14 +31,14 @@ function App() {
     useEffect(() => {
         
         //URLs des API Django locales
-        const urlProjects = "http://localhost:8000/api/projets/";
-        const urlTechnos = "http://localhost:8000/api/projets/list-techno";
+        //const urlProjects = "http://localhost:8000/api/projets/";
+        //const urlTechnos = "http://localhost:8000/api/projets/list-techno";
        
 
         // URLs de l'API Django en production
-        /* const urlProjects = "https://mon-portfolio-1-48v8.onrender.com/api/projets/";
+        const urlProjects = "https://mon-portfolio-1-48v8.onrender.com/api/projets/";
         const urlTechnos = "https://mon-portfolio-1-48v8.onrender.com/api/projets/list-techno";
- */
+        
         // Promise.all() permet d'exécuter les deux requêtes fetch en parallèle
         // et d'attendre que les deux soient résolues avec succès.
         Promise.all([
