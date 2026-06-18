@@ -8,13 +8,13 @@ const Footer = () => {
             <div className="footer__head">
                 <div className="footer__portfolio">
                     <h3>Portfolio</h3>
-                    <p>Développeur Full-Stack passionné par la création de solutions innovantes.</p>
+                    <p>Data Engineer & Full-Stack Developer | Mobile Dev | passionné par la création de solutions innovantes.</p>
                 </div>
 
                 <div className="footer__nav">
                     <h3>Navigation</h3>
                     <Link to="/">Accueil</Link>
-                    <Link to="/projects">Projets</Link>
+                    {/* <Link to="/projects">Projets</Link> */}
                     <Link to="/contact">Contact</Link>
                 </div>
 

@@ -1,5 +1,6 @@
 .cta {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-md) var(--spacing-lg) var(--spacing-md);
+  /* padding: var(--spacing-sm) var(--spacing-md); */
   background-color: var(--color-bg-primary);
 }
 

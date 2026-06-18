@@ -34,11 +34,17 @@
 /* Body */
 .project-card__body {
     /* padding: 1.25rem var(--spacing-md); */
-    padding: 10px var(--spacing-xs);
+    /* padding: 10px var(--spacing-xs);
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.5rem; */
+
+    padding: 6px var(--spacing-xs);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
 }
+
 
 .project-card__title {
     font-size: 1.1rem;
