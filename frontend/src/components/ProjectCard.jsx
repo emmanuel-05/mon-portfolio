@@ -1,6 +1,6 @@
 // Importation des styles CSS spécifiques à la carte projet
 import "./ProjectCard.css";
-
+import { useState } from 'react';
 /**
  * Composant ProjectCard
  * Affiche les détails d'un projet individuel reçu via les props.
