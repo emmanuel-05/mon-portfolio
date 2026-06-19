@@ -59,7 +59,7 @@ const ProjectCard = ({ projet }) => {
                     </div>
                 )}
 
-                <a href={projet.lien_github} target="_blank" rel="noopener noreferrer">
+                <a href={projet.lien_demo} target="_blank" rel="noopener noreferrer">
                     Voir le projet
                 </a>
             </div>
