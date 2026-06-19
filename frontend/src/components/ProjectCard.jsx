@@ -12,6 +12,8 @@ const ProjectCard = ({ projet }) => {
     const MAX_VISIBLE = 3;
     const visibleTechs = projet.technologies.slice(0, MAX_VISIBLE);
     const extraCount = projet.technologies.length - MAX_VISIBLE;
+    const [isExpanded, setIsExpanded] = useState(false);
+
     return (
         // Balise sémantique HTML5 <article> représentant un contenu autonome (la carte projet)
         <article className="project-card">
@@ -33,7 +35,7 @@ const ProjectCard = ({ projet }) => {
 
             <div className="project-card__body">
                 <h3 className="project-card__title">{projet.titre}</h3>
-                <p className="project-card__description">{projet.description}</p>
+                <p className={`project-card__description ${isExpanded ? 'is-expanded' : 'is-clamped'} `}>{projet.description}</p>
 
                 {/* 
                     Section des technologies (tags) :

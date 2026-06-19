@@ -56,6 +56,37 @@
     font-size: 0.875rem;
     color: var(--color-text-secondary);
     line-height: 1.65;
+    transition: all 0.3s ease;
+}
+
+/* Quand le texte est masqué (limité à 3 lignes) */
+.project-card__description.is-clamped {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Nombre maximal de lignes visibles */
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+/* Quand le texte est déplié */
+.project-card__description.is-expanded {
+    display: block;
+    overflow: visible;
+}
+
+/* Style du bouton "Voir plus" */
+.project-card__see-more {
+    background: none;
+    border: none;
+    color: var(--color-primary, #3b82f6); /* Ta couleur principale */
+    font-size: 0.813rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+.project-card__see-more:hover {
+    text-decoration: underline;
 }
 
 /* Tags */
