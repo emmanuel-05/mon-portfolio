@@ -12,12 +12,17 @@ class TechnologieSerialiser(serializers.ModelSerializer):
 
 class ProjetSerializer(serializers.ModelSerializer):
 
-    # Override du champ de relation Many-to-Many 'technologies'.
-    # Au lieu de renvoyer une simple liste d'identifiants numériques (ex: [1, 2]),
-    # on utilise le sérialiseur TechnologieSerialiser pour inclure les objets complets :
-    # many=True : spécifie que le projet peut avoir plusieurs technologies associées.
     technologies = TechnologieSerialiser(many=True, read_only=True)
     
     class Meta:
         model = Projet
-        fields = '__all__'
+        #fields = '__all__'
+        fields = [
+            'id',
+            'titre',
+            'description', 
+            'image_url',
+            'technologies',
+            'lien_github',
+            'lien_demo'
+        ]
