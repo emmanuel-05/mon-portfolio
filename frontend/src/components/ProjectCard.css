@@ -62,7 +62,7 @@
 /* Quand le texte est masqué (limité à 3 lignes) */
 .project-card__description.is-clamped {
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Nombre maximal de lignes visibles */
+    -webkit-line-clamp: 2; /* Nombre maximal de lignes visibles */
     -webkit-box-orient: vertical;  
     overflow: hidden;
 }

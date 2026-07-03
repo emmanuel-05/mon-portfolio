@@ -15,7 +15,6 @@ const ProjectCard = ({ projet }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        // Balise sémantique HTML5 <article> représentant un contenu autonome (la carte projet)
         <article className="project-card">
             {projet.image_url ? (
                 <div className="project-card__image-container">
@@ -23,7 +22,7 @@ const ProjectCard = ({ projet }) => {
                         src={projet.image_url} 
                         alt={`Capture d'écran du projet ${projet.titre}`} 
                         className="project-card__image"
-                        loading="lazy" // Optimisation performance : charge l'image uniquement quand elle apparaît à l'écran
+                        loading="lazy" // charge l'image uniquement quand elle apparaît à l'écran
                     />
                 </div>
             ) : (
