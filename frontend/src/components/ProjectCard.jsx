@@ -1,6 +1,9 @@
 // Importation des styles CSS spécifiques à la carte projet
 import "./ProjectCard.css";
+import { GlobeCheck } from 'lucide-react';
 import { useState } from 'react';
+import { FaGithub } from "react-icons/fa";
+
 /**
  * Composant ProjectCard
  * Affiche les détails d'un projet individuel reçu via les props.
@@ -35,6 +38,17 @@ const ProjectCard = ({ projet }) => {
             <div className="project-card__body">
                 <h3 className="project-card__title">{projet.titre}</h3>
                 <p className={`project-card__description ${isExpanded ? 'is-expanded' : 'is-clamped'} `}>{projet.description}</p>
+                {/* <p className={`project-card__description ${isExpanded ? 'is-expanded' : 'is-clamped'} `}>
+                    {projet.description}
+                    {extraCount > 0 && (
+                        <button 
+                        onClick={() => setIsExpanded(isExpanded)}
+                        className="project-card__see-more"
+                        >
+                            {isExpanded ? 'Voir moins' : 'Voir plus'}
+                        </button>
+                    )}
+                </p> */}
 
                 {/* 
                     Section des technologies (tags) :
@@ -57,10 +71,28 @@ const ProjectCard = ({ projet }) => {
                         )}
                     </div>
                 )}
+                
+                <div className="project-card__actions">
+                    <h4 className="project-card__action-title">Liens du projet</h4>
+                        <a 
+                            href={projet.lien_demo} 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="project-card__action-btn"
+                        >
+                            <GlobeCheck size={19} />
+                        </a>
+                        <a 
+                            href={projet.lien_github} 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="project-card__action-btn"
+                        >
+                            <FaGithub size={19} />
+                        </a>
 
-                <a href={projet.lien_demo} target="_blank" rel="noopener noreferrer">
-                    Voir le projet
-                </a>
+                </div>
+                
             </div>
         </article>
     );
