@@ -1,5 +1,5 @@
 services:
-  # Base de données PostgreSQL optimisée pour un usage léger
+  # Base de données PostgreSQL optimisée pour un usage léger (< 256M)
   db:
     image: postgres:16-alpine
     container_name: portfolio_db
@@ -10,7 +10,6 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    # Optimisations 
     command: postgres -c shared_buffers=64MB -c max_connections=20 -c work_mem=4MB -c maintenance_work_mem=16MB
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-portfolio_db}"]
@@ -22,7 +21,7 @@ services:
         limits:
           memory: 256M
 
-  # Backend Django (Gunicorn + WhiteNoise + DRF)
+  # Backend Django (Gunicorn + DRF)
   backend:
     build:
       context: .
@@ -34,6 +33,8 @@ services:
     environment:
       - DATABASE_URL=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-portfolio_db}
     volumes:
+      # Volumes partagés en écriture pour les fichiers statiques collectés et les uploads
+      - static_volume:/app/staticfiles
       - media_volume:/app/media
     depends_on:
       db:
@@ -43,7 +44,7 @@ services:
         limits:
           memory: 300M
 
-  # Frontend React (SPA servie par Nginx agissant également en Reverse Proxy)
+  # Frontend React (SPA servie par Nginx + Distribution directe des statiques/médias)
   frontend:
     build:
       context: ./frontend
@@ -52,6 +53,10 @@ services:
     restart: always
     ports:
       - "80:80"
+    volumes:
+      # Montage en lecture seule (:ro) des fichiers statiques Django et médias
+      - static_volume:/var/www/staticfiles:ro
+      - media_volume:/var/www/media:ro
     depends_on:
       - backend
     deploy:
@@ -59,9 +64,11 @@ services:
         limits:
           memory: 64M
 
-# Volumes persistants pour la base de données et les médias uploadés
+# Volumes nommés persistants partagés
 volumes:
   postgres_data:
+    driver: local
+  static_volume:
     driver: local
   media_volume:
     driver: local

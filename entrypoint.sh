@@ -4,8 +4,8 @@ set -e
 echo "==> Application des migrations de la base de données..."
 python manage.py migrate --noinput
 
-echo "==> Collecte des fichiers statiques (WhiteNoise)..."
-python manage.py collectstatic --noinput
+echo "==> Collecte des fichiers statiques dans STATIC_ROOT..."
+python manage.py collectstatic --noinput --clear
 
 if [ -f "create_superuser.py" ]; then
     echo "==> Vérification / Création automatique du superutilisateur..."
