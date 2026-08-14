@@ -13,13 +13,13 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Configuration Django 5/6 pour le stockage des fichiers statiques
+# Configuration Django pour le stockage des fichiers statiques
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
