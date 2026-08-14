@@ -1,65 +1,49 @@
-// Importation des styles CSS spécifiques à la carte projet
-import "./ProjectCard.css";
+import React, { useState, memo } from 'react';
 import { GlobeCheck } from 'lucide-react';
-import { useState } from 'react';
-import { FaGithub } from "react-icons/fa";
+import { FaGithub } from 'react-icons/fa';
+import './ProjectCard.css';
 
 /**
- * Composant ProjectCard
- * Affiche les détails d'un projet individuel reçu via les props.
- *
- * @param {Object} props - Les propriétés passées au composant.
- * @param {Object} props.projet - L'objet projet contenant titre, description, technologies, lien_github.
+ * Composant ProjectCard optimisé (React.memo)
+ * Affiche la carte d'un projet avec gestion défensive des données et lazy loading.
  */
-const ProjectCard = ({ projet }) => {
-    const MAX_VISIBLE = 3;
-    const visibleTechs = projet.technologies.slice(0, MAX_VISIBLE);
-    const extraCount = projet.technologies.length - MAX_VISIBLE;
+const ProjectCard = memo(({ projet }) => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const MAX_VISIBLE = 3;
+
+    const technologies = projet?.technologies || [];
+    const visibleTechs = technologies.slice(0, MAX_VISIBLE);
+    const extraCount = technologies.length - MAX_VISIBLE;
 
     return (
         <article className="project-card">
-            {projet.image_url ? (
+            {projet?.image_url ? (
                 <div className="project-card__image-container">
-                    <img 
-                        src={projet.image_url} 
-                        alt={`Capture d'écran du projet ${projet.titre}`} 
+                    <img
+                        src={projet.image_url}
+                        alt={`Capture d'écran du projet ${projet.titre || ''}`}
                         className="project-card__image"
-                        loading="lazy" // charge l'image uniquement quand elle apparaît à l'écran
+                        loading="lazy"
+                        decoding="async"
                     />
                 </div>
             ) : (
-                /* Un bloc gris par défaut si jamais un projet n'a pas encore d'image */
                 <div className="project-card__image-placeholder">
                     <span>Pas d'aperçu disponible</span>
                 </div>
             )}
 
             <div className="project-card__body">
-                <h3 className="project-card__title">{projet.titre}</h3>
-                <p className={`project-card__description ${isExpanded ? 'is-expanded' : 'is-clamped'} `}>{projet.description}</p>
-                {/* <p className={`project-card__description ${isExpanded ? 'is-expanded' : 'is-clamped'} `}>
-                    {projet.description}
-                    {extraCount > 0 && (
-                        <button 
-                        onClick={() => setIsExpanded(isExpanded)}
-                        className="project-card__see-more"
-                        >
-                            {isExpanded ? 'Voir moins' : 'Voir plus'}
-                        </button>
-                    )}
-                </p> */}
+                <h3 className="project-card__title">{projet?.titre}</h3>
+                
+                <p 
+                    className={`project-card__description ${isExpanded ? 'is-expanded' : 'is-clamped'}`}
+                    onClick={() => setIsExpanded((prev) => !prev)}
+                >
+                    {projet?.description}
+                </p>
 
-                {/* 
-                    Section des technologies (tags) :
-                    1. On vérifie si la liste de technologies existe et n'est pas vide.
-                    2. Si oui, on affiche un conteneur div avec la classe CSS 'project-card__tags'.
-                    3. On utilise .map() pour boucler sur chaque technologie de la liste.
-                    4. Pour chaque technologie, on génère un élément <span> avec une clé unique (tech.id) 
-                        et on affiche son nom (tech.nom).
-                */}
-
-                {projet.technologies && projet.technologies.length > 0 && (
+                {technologies.length > 0 && (
                     <div className="project-card__tags">
                         {visibleTechs.map((tech) => (
                             <span key={tech.id} className="project-card__tag">
@@ -71,31 +55,43 @@ const ProjectCard = ({ projet }) => {
                         )}
                     </div>
                 )}
-                
-                <div className="project-card__actions">
-                    <h4 className="project-card__action-title">Liens du projet</h4>
-                        <a 
-                            href={projet.lien_demo} 
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="project-card__action-btn"
-                        >
-                            <GlobeCheck size={19} />
-                        </a>
-                        <a 
-                            href={projet.lien_github} 
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="project-card__action-btn"
-                        >
-                            <FaGithub size={19} />
-                        </a>
 
-                </div>
-                
+                {(projet?.lien_demo || projet?.lien_github) && (
+                    <div className="project-card__actions">
+                        <span className="project-card__action-title">Liens du projet</span>
+                        <div className="project-card__action-links">
+                            {projet.lien_demo && (
+                                <a
+                                    href={projet.lien_demo}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="project-card__action-btn"
+                                    aria-label={`Démonstration en ligne du projet ${projet.titre}`}
+                                    title="Voir la démo en ligne"
+                                >
+                                    <GlobeCheck size={19} />
+                                </a>
+                            )}
+                            {projet.lien_github && (
+                                <a
+                                    href={projet.lien_github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="project-card__action-btn"
+                                    aria-label={`Code source GitHub du projet ${projet.titre}`}
+                                    title="Voir le code source"
+                                >
+                                    <FaGithub size={19} />
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                )}
             </div>
         </article>
     );
-};
+});
+
+ProjectCard.displayName = 'ProjectCard';
 
 export default ProjectCard;

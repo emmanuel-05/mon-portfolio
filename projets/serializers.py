@@ -1,28 +1,32 @@
 from rest_framework import serializers
 from .models import Projet, Technologie
 
-class TechnologieSerialiser(serializers.ModelSerializer):
+class TechnologieSerializer(serializers.ModelSerializer):
     """
-    Sérialiseur pour le modèle Technologie.
-    Convertit les instances du modèle Technologie en données JSON prêtes pour l'API.
+    Sérialiseur optimisé pour le modèle Technologie.
     """
     class Meta:
         model = Technologie
-        fields = ['id', 'nom'] 
+        fields = ['id', 'nom']
+
+# Alias pour préserver la compatibilité
+TechnologieSerialiser = TechnologieSerializer
+
 
 class ProjetSerializer(serializers.ModelSerializer):
+    """
+    Sérialiseur optimisé pour le modèle Projet avec relation ManyToMany sérialisée.
+    """
+    technologies = TechnologieSerializer(many=True, read_only=True)
 
-    technologies = TechnologieSerialiser(many=True, read_only=True)
-    
     class Meta:
         model = Projet
-        #fields = '__all__'
         fields = [
             'id',
             'titre',
-            'description', 
+            'description',
             'image_url',
             'technologies',
             'lien_github',
-            'lien_demo'
+            'lien_demo',
         ]
