@@ -202,3 +202,19 @@ thumb
 sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/react,django
+# Environnements virtuels Python
+.venv/
+venv/
+ENV/
+env/
+
+# Node / React
+node_modules/
+.next/
+build/
+dist/
+
+# Fichiers Python temporaires & variables d'environnement
+__pycache__/
+*.py[cod]
+.env
