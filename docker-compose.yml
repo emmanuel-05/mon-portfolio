@@ -8,6 +8,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-portfolio_db}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "127.0.0.1.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     command: postgres -c shared_buffers=64MB -c max_connections=20 -c work_mem=4MB -c maintenance_work_mem=16MB
@@ -52,7 +54,7 @@ services:
     container_name: portfolio_frontend
     restart: always
     ports:
-      - "80:80"
+      - "81:80"
     volumes:
       # Montage en lecture seule (:ro) des fichiers statiques Django et médias
       - static_volume:/var/www/staticfiles:ro

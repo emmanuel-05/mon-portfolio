@@ -40,6 +40,23 @@ ALLOWED_HOSTS = [host.strip() for host in os.environ.get('ALLOWED_HOSTS', '*').s
 raw_csrf = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost http://127.0.0.1')
 CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in raw_csrf.split(' ') if origin.strip()]
 
+# Origines de confiance pour la protection CSRF (Admin & requêtes POST en production)
+CSRF_TRUSTED_ORIGINS = [
+    'http://169.58.171.214:81',
+    'https://test.ibson.online',
+    'http://test.ibson.online',
+]
+raw_csrf = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost http://127.0.0.1')
+if raw_csrf:
+    env_origins = [origin.strip() for origin in raw_csrf.replace(',', ' ').split(' ') if origin.strip()]
+    CSRF_TRUSTED_ORIGINS.extend([o for o in env_origins if o not in CSRF_TRUSTED_ORIGINS])
+
+# CONFIGURATION PROXY & SÉCURITÉ HTTPS (PRODUCTION)
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
