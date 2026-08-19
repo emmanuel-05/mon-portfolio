@@ -38,24 +38,13 @@ ALLOWED_HOSTS = [host.strip() for host in os.environ.get('ALLOWED_HOSTS', '*').s
 
 # Origines de confiance pour la protection CSRF (Admin & requêtes POST en production)
 raw_csrf = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost http://127.0.0.1')
-CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in raw_csrf.split(' ') if origin.strip()]
-
-# Origines de confiance pour la protection CSRF (Admin & requêtes POST en production)
-CSRF_TRUSTED_ORIGINS = [
-    'http://169.58.171.214:81',
-    'https://test.ibson.online',
-    'http://test.ibson.online',
-]
-raw_csrf = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost http://127.0.0.1')
-if raw_csrf:
-    env_origins = [origin.strip() for origin in raw_csrf.replace(',', ' ').split(' ') if origin.strip()]
-    CSRF_TRUSTED_ORIGINS.extend([o for o in env_origins if o not in CSRF_TRUSTED_ORIGINS])
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in raw_csrf.replace(',', ' ').split(' ') if origin.strip()]
 
 # CONFIGURATION PROXY & SÉCURITÉ HTTPS (PRODUCTION)
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', str(not DEBUG)).lower() in ('true', '1', 't')
+SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', str(not DEBUG)).lower() in ('true', '1', 't')
 
 # Application definition
 INSTALLED_APPS = [
@@ -84,7 +73,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+# Configuration CORS
+CORS_ALLOW_ALL_ORIGINS = os.environ.get('CORS_ALLOW_ALL_ORIGINS', str(DEBUG)).lower() in ('true', '1', 't')
+raw_cors = os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost http://127.0.0.1 http://localhost:5173 https://portfolio-gnamien.faslab.online')
+CORS_ALLOWED_ORIGINS = [origin.strip() for origin in raw_cors.replace(',', ' ').split(' ') if origin.strip()]
 
 ROOT_URLCONF = 'backend.urls'
 

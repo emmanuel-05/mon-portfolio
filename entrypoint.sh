@@ -10,6 +10,7 @@ python manage.py collectstatic --noinput --clear
 echo "==> Ajustement des permissions des fichiers statiques et médias pour Nginx..."
 chmod -R 755 /app/staticfiles /app/media 2>/dev/null || true
 
+
 if [ -f "create_superuser.py" ]; then
     echo "==> Vérification / Création automatique du superutilisateur..."
     python create_superuser.py || true

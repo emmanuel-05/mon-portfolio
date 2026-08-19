@@ -22,7 +22,7 @@ function App() {
         const controller = new AbortController();
         const apiBase = import.meta.env.VITE_API_BASE || '';
         const urlProjects = `${apiBase}/api/projets/`;
-        const urlTechnos = `${apiBase}/api/projets/list-techno`;
+        const urlTechnos = `${apiBase}/api/projets/list-techno/`;
 
         const fetchData = async () => {
             try {
